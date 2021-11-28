@@ -1,0 +1,171 @@
+<!doctype html>
+<html data-n-head-ssr lang="zh_TW" data-n-head="%7B%22lang%22:%7B%22ssr%22:%22zh_TW%22%7D%7D">
+
+<head>
+    <title>U-Bike 繞台灣</title>
+    <meta data-n-head="ssr" charset="utf-8">
+    <meta data-n-head="ssr" name="viewport" content="width=device-width,initial-scale=1">
+    <meta data-n-head="ssr" data-hid="description" name="description" content="">
+    <meta data-n-head="ssr" name="format-detection" content="telephone=no">
+
+    <link data-n-head="ssr" rel="icon" type="image/x-icon" href="/bike-line-map/favicon.ico">
+    <link data-n-head="ssr" rel="preconnect" href="https://fonts.googleapis.com">
+    <link data-n-head="ssr" rel="preconnect" href="https://fonts.gstatic.com">
+    <link data-n-head="ssr" rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300;1,400;1,700&display=swap">
+    <link data-n-head="ssr" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Icons">
+    <link data-n-head="ssr" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Icons+Outlined">
+    <link data-n-head="ssr" rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">
+    <link data-n-head="ssr" rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.4.1/MarkerCluster.css">
+    <link data-n-head="ssr" rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.4.1/MarkerCluster.Default.css">
+    <link data-n-head="ssr" rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css">
+    <link rel="stylesheet" href="test.css">
+</head>
+
+<body>
+    <div id="__layout">
+        <div>
+            <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+                <div class="container">
+                    <h1 class="d-flex align-items-center"><a href="/bike-line-map/" aria-current="page"
+                            class="navbar-brand text-white p-0 fz-larger nuxt-link-exact-active nuxt-link-active">
+                            <img src="./img/logo.svg" alt="bike-line-log"></a>
+                    </h1>
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a href="/bike-line-map/" aria-current="page"
+                                class="nav-link nuxt-link-exact-active nuxt-link-active">
+                                尋找 U-bike
+                            </a></li>
+                        <li class="nav-item"><a href="/bike-line-map/recommend" class="nav-link">
+                                搜尋路線
+                            </a></li>
+                    </ul>
+                </div>
+            </nav>
+            <div>
+                <figure class="banner banner__index magic-height-400 mb-8 mb-lg-15">
+                    <div class="container h-100">
+                        <div class="row align-items-center h-100">
+                            <div class="col-md-6 mx-auto">
+                                <h2 class="text-center text-white mb-5">
+                                    尋找附近 U-Bike
+                                </h2>
+                                <div class="p-5 bg-white rounded">
+                                    <div class="row g-2 mb-5">
+                                        <div class="col-lg-6"><select aria-label="Default select example"
+                                                class="form-select py-3 border-secondary">
+                                                <option selected>
+                                                    請選擇城市
+                                                </option>
+                                                <option value="臺北市">
+                                                    臺北市
+                                                </option>
+                                                <option value="新北市">
+                                                    新北市
+                                                </option>
+                                                <option value="桃園市">
+                                                    桃園市
+                                                </option>
+                                                <option value="臺中市">
+                                                    臺中市
+                                                </option>
+                                                <option value="臺南市">
+                                                    臺南市
+                                                </option>
+                                                <option value="高雄市">
+                                                    高雄市
+                                                </option>
+                                                <option value="新竹市">
+                                                    新竹市
+                                                </option>
+                                                <option value="苗栗縣">
+                                                    苗栗縣
+                                                </option>
+                                                <option value="嘉義市">
+                                                    嘉義市
+                                                </option>
+                                                <option value="屏東縣">
+                                                    屏東縣
+                                                </option>
+                                                <option value="金門縣">
+                                                    金門縣
+                                                </option>
+                                            </select></div>
+                                        <div class="col-lg-6 mb-5"><input placeholder="請輸入站點名稱" disabled
+                                                class="form-control py-3 border-secondary"></div>
+                                        <div class="col-xl-6"><button type="button"
+                                                class="btn btn-lg btn-info me-5 d-flex align-items-center w-100"><span
+                                                    class="material-icons-outlined text-white me-3">
+                                                    person_pin_circle </span>
+                                                以我的位置搜尋
+                                            </button></div>
+                                        <div class="col-xl-6 d-flex align-items-center">
+                                            <p class="text-danger d-flex align-items-center"><span
+                                                    class="material-icons-outlined ms-4 me-3"> warning </span>
+                                                此功能需開啟定位
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </figure>
+                <section class="container mb-15">
+                    <div class="row">
+                        <div class="col-md-2 order-2 order-md-1">
+                            <ul class="list-group list-group-flush">
+                                <li
+                                    class="list-group-item list-group-item-action d-flex justify-content-center align-items-center">
+                                    <span class="material-icons-outlined text-info me-3"> person_pin_circle </span>
+                                    <p>目前位置</p>
+                                </li>
+                                <li
+                                    class="list-group-item list-group-item-action d-flex justify-content-center align-items-center">
+                                    <span class="material-icons-outlined text-search me-3"> person_pin_circle
+                                    </span>
+                                    <p>搜尋位置</p>
+                                </li>
+                                <li
+                                    class="list-group-item list-group-item-action d-flex justify-content-center align-items-center">
+                                    <span class="material-icons-outlined text-success me-3"> location_on </span>
+                                    <p>正常租借</p>
+                                </li>
+                                <li
+                                    class="list-group-item list-group-item-action d-flex justify-content-center align-items-center">
+                                    <span class="material-icons-outlined text-primary me-3"> location_on </span>
+                                    <p>無車可借</p>
+                                </li>
+                                <li
+                                    class="list-group-item list-group-item-action d-flex justify-content-center align-items-center">
+                                    <span class="material-icons-outlined text-danger me-3"> location_on </span>
+                                    <p>車位已滿</p>
+                                </li>
+                                <li
+                                    class="list-group-item list-group-item-action d-flex justify-content-center align-items-center">
+                                    <span class="material-icons-outlined text-dark me-3"> location_on </span>
+                                    <p>暫停營運</p>
+                                </li>
+                            </ul> <input placeholder="請輸入站點名稱" disabled
+                                class="form-control py-3 mb-5 border-secondary text-center d-none d-lg-block">
+                            <!---->
+                        </div>
+                        <div class="col-md-10 order-1 order-md-2">
+                            <!---->
+                            <div id="mapID" class="magic-height-600"></div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <div class="bg-primary">
+                <div class="container d-flex align-items-center py-5"><img src="./img/logo.svg" alt="bike-line-log">
+                    <div class="text-secondary">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
